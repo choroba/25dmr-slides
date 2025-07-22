@@ -1,0 +1,95 @@
+#! /usr/bin/perl
+use warnings;
+use strict;
+
+use XML::XSH2;
+
+
+{   package XML::XSH2::Map;
+
+    use Encode;
+
+    our ($tmpl, $html);
+
+
+    sub newname {
+        my $file = shift;
+        substr $file, 0, 0, 'generated/' unless 0 == index $file, 'generated/';
+        return $file
+    }
+
+
+    sub process {
+        my ($name, $data) = @_;
+
+        if ('htmlize' eq $name) {
+            my $newname = newname("$data.html");
+            0 == system qq{ cd generated && make $data.html } or die $!;
+            open my $fh, '<', $newname or die $!;
+            # <$fh> for 1, 2; # Skip the declaration
+            my $buff;
+            while (<$fh>) {
+                $buff .= $_ unless /no-htmlize/;
+            }
+            return $buff
+
+        } elsif ('extract-text' eq $name) {
+            open my $HTML, '<', $data or die "$data: $!";
+            return join q(), <$HTML>
+
+        } elsif ('output' eq $name) {
+            return decode('UTF-8', qx{ $data })
+
+        } elsif ('link' eq $name) {
+            return qq(<a href="http://p3rl.org/$data">$data</a>)
+
+        } elsif ('img' eq $name) {
+            my ($file, $args) = split ' ', $data, 2;
+            $args //= "";
+            return qq(<div class="image"><img src="img/$file" $args/></div>)
+
+        } else {
+            die "Unknown processing instruction $name."
+        }
+    }
+
+
+    sub save_text {
+        my ($file, $html_text) = @_;
+        $file =~ s/\.html// or die "Invalid file name $file";
+        $file = newname($file);
+        open my $TEXT, '>', $file or die $!;
+        print {$TEXT} $html_text;
+    }
+}
+
+
+die "2 arguments expected.\n" unless 2 == @ARGV;
+($XML::XSH2::Map::tmpl, $XML::XSH2::Map::html) = @ARGV;
+
+xsh << '</xsh>';
+    open :F html $tmpl ;
+    for //processing-instruction() {
+        my $name = name() ;
+        my $data = . ;
+        if ($name = 'htmlize' or $name = 'extract-text') {
+            my $pre := xinsert element pre replace . ;
+            my $html = { process($name, $data) } ;
+            xinsert chunk $html into $pre ;
+            if ($name = 'extract-text') {
+                my $text = $pre//text();
+                perl { save_text($data, $text) } ;
+            }
+            if $pre//pre $pre := xmv $pre//pre replace $pre ;
+            set $pre/@title xsh:subst($data, '\.html', '') ;
+        } elsif ($name = 'output') {
+            insert text { process($name, $data) } replace . ;
+        } elsif ($name = 'link' or $name = 'img') {
+            insert chunk { process($name, $data) } replace . ;
+        } else {
+            echo :e concat('Unknown PI: ', $name, '.') ;
+            exit 1 ;
+        }
+    }
+    save :F html :f $html ;
+</xsh>

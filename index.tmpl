@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-GB">
+  <head>
+    <title>Comparing Manual and Automatic UMRs for Czech and Latin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="copyright" content="Copyright &#169; 2005-2010 W3C (MIT, ERCIM, Keio)">
+    <link rel="stylesheet" href="styles/slidy.css" type="text/css">
+    <link rel="stylesheet" href="styles/orange.css" type="text/css">
+    <script src="scripts/slidy.js" charset="utf-8" type="text/javascript"></script>
+  </head>
+  <body style="single_style">
+
+    <!-- ====================================================================== -->
+
+    <div class="background wf"><table class="beamer" width="98%"><tr><td nowrap=1>Comparing Manual and Automatic UMRs for Czech and Latin<td width="100%" class="middle">.&nbsp;.<td align="right" nowrap=1>DMR 2025 Prague</table>
+    </div>
+
+
+    <div class="slide cover">
+      <table class="beamer"><tr><td style="color:white">DMR 2025 Prague</table>
+
+      <p class="skip">
+      <h2>Comparing Manual and Automatic UMRs for Czech and Latin</h2>
+      <h3>Jan Štěpánek</h3>
+      <h3>Daniel Zeman</h3>
+      <h3>Markéta Lopatková</h3>
+      <h3>Federica Gamba</h3>
+      <h3>Hana Hledíková</h3>
+
+      <div class="titlefooter">
+        <table  style="color:black;text-align:left;font-size:70%">
+          <tr><td width="15%"><img src="img/UK-logo-square-EN.svg">
+              <td width="10%"><img src="img/logo_ufal.svg">
+              <td style="padding-left:6em;">
+                Charles University<br>
+                Faculty of Mathematics and Physics<br>
+                Institute of Formal and Applied Linguistics
+              <td style="font-size:50%"><img src="img/by-nc-sa.svg"><br>unless otherwise stated
+      </table></div>
+    </div>
+
+    <!-- ====================================================================== -->
+
+    <div class="slide wf">
+      <h1>Motivation</h1>
+
+      <h2>Annotation from scratch</h2>
+      <ul class="incremental">
+        <li>Time consuming
+        <li>Expertise and training needed
+      </ul>
+    </div>
+
+    <!-- ====================================================================== -->
+
+    <div class="slide wf">
+      <h1>Motivation (2)</h1>
+
+      <h2>Existing corpora</h2>
+      <ul class="incremental">
+        <li>Rich annotation already there
+        <li>Automatic conversion
+        <li>Czech (<a href="http://hdl.handle.net/11234/1-5813" title="Prague Dependency Treebank &ndash; Consolidated">PDT-C</a>) and Latin (<a href="https://itreebank.marginalia.it/" title="Latin Dependency Treebank">LDT</a>)
+        <li>Same annotation scenario → same conversion procedure
+        <li>Comparison with manually annotated data
+      </ul>
+    </div>
+
+    <!-- ====================================================================== -->
+
+    <div class="slide wf">
+      <h1>Uniform Meaning Representation</h1>
+      <div style="position:absolute;right:8em;top:6em;z-axis:10000"><img src="img/umr_english.png"></div>
+      <pre>################################################################################
+# meta-info :: sent_id = u_tree-cs-s1-root
+# :: snt1
+Index: 1       2    3  4     5  6   7     8
+Words: Lindsay left in order to eat lunch .
+
+# sentence level graph:
+(s1l / leave-02
+    :ARG0 (s1p / person
+        :name (s1n / name :op1 "Lindsay"))
+    :aspect performance
+    :purpose (s1e / eat-01
+        :ARG0 s1p
+        :ARG1 (s1l2 / lunch)
+        :aspect performance))
+
+# alignment:
+s1l: 2-2
+s1p: 1-1
+s1n: 0-0
+s1e: 6-6
+s1l2: 7-7
+
+# document level annotation:
+(s1s0 / sentence
+    :temporal ((document-creation-time :before s1l)
+            (s1l :after s1e))
+    :modal ((root :modal author)
+            (author :full-affirmative s1l)
+            (author :full-negative s1e)))</pre>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1>Prague Dependency Treebank</h1>
+      <p><img src="img/pdt-czech.svg"><img src="img/pdt-czech-a.svg"></p>
+      <table class="align-top" style="font-size:35%"><tr><td><?htmlize czech-pdt.t.xml>
+      <td><?htmlize czech-pdt.a.xml>
+      <td><?htmlize czech-pdt.m.xml>
+      <td><?htmlize czech-pdt.w.xml>
+      </table>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1>The Differences</h1>
+      <table class="align-top"><tr><th>UMR<th>PDT
+            <tr class="incremental"><td class="non-incremental"><ul>
+                  <li>represents meaning
+                  <li>encodes the frame-based predicate-argument structure of all eventive concepts
+                  <li>includes aspectual information
+                  <li>semantic relations crossing sentence boundaries: coreference, temporal chains, epistemic modality
+                </ul>
+                <td class="non-incremental"><ul>
+                    <li>represents linguistically structured meaning
+                    <li>predicate-argument structure (valency) and dependency relations
+                    <li>topic-focus articulation
+                    <li>coreference
+                  </ul>
+      </table>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1>Automatic (Partial) Conversion</h1>
+      <ul>
+        <li>Based on the tectogrammatical structure
+        <li>Structural transformations: coreference, coordination, relative clauses, control or raising verbs
+        <li>Node labels (<tt>t_lemma</tt> → <tt>concept</tt>)
+        <li>Edge labelling (valency lexicon → PropBank, default mapping)
+        <li>Selected attributes (<tt>aspect, degree, polarity, quant, refer-number, refer-person</tt>)
+        <li>Node alignment
+      </ul>
+      <h2>Ignored (so far)</h2>
+      <ul>
+        <li>Attributes <tt>wiki, modal-strength, mode, polite, quote</tt>
+        <li>Most of the document-level annotation (besides coreference)
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1>Data Selected for the Experiment</h1>
+      <table class="align-top"><tr><th>Czech<th>Latin
+            <tr><td><ul><li>news: 25 sentences
+                    <li>spontaneous dialogues: 50 sentences
+                      <li>Translated WSJ texts: 16 sentences</ul>
+              <td><ul><li><i>De coniuratione Catilinae</i> by Sallust: 50 sentences</ul>
+      </table>
+      <p>21 sentences from the first two Czech corpora were annotated
+      manually by two annotators to estimate
+      the <span title="Inter-Annotator Agreement">IAA</span>.
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1>Metrics for Graph Comparison</h1>
+      <p>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1></h1>
+      <p>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1></h1>
+      <p>
+    </div>
+
+    <!-- ====================================================================== -->
+
+    <div class="slide center wf">
+      <h1>Thank you</h1>
+    </div>
+
+    <!-- ====================================================================== -->
+
+</body></html>
+
+<!--
+    <div class="slide">
+      <h1></h1>
+      <p>
+    </div>
+
+    <!-- ====================================================================== -->
+
+<!-- Local Variables: -->
+<!-- auto-fill-function: nil-->
+<!-- End: -->

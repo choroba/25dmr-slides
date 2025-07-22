@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" onload="init(evt)" onmousemove="mouse_move(evt)" onmouseout="mouse_out(evt)" height="532" width="279">
+ <script type="text/ecmascript">
+      var doc = null;
+      var root = null;
+      var css = null;
+      var last_target = null;
+      var svgNs = "http://www.w3.org/2000/svg";
+
+      function init(event) {
+         doc = event.target.ownerDocument;
+         root = doc.documentElement;
+         if (root.styleSheets != null &amp;&amp; root.styleSheets[0] != null) css = root.styleSheets[0]
+         else if (doc.styleSheets != null &amp;&amp; doc.styleSheets[0] != null) css = doc.styleSheets[0];
+         top.zoomSVG = zoom;
+         if (top.svg_loaded) top.svg_loaded(doc);
+         if (top.setSVGTitle) top.setSVGTitle(get_title());
+         if (top.setSVGDesc) top.setSVGDesc(get_desc());
+         if (top.highlightSVGNodes) top.highlightSVGNodes(css);
+      }
+      function mouse_out (event) {
+        hide_tooltip(event);
+      }
+      function mouse_move (event) {
+         show_tooltip(event);
+      }
+      function get_title () {
+        var title = root.getElementsByTagName('title').item(0);
+        if (title &amp;&amp; title.parentNode == root) {
+           return title.firstChild.nodeValue;
+        } else {
+           return '';
+        }
+      }
+      function get_desc () {
+        var desc = root.getElementsByTagName('desc').item(0);
+        if (desc &amp;&amp; desc.parentNode == root) {
+           var n = desc.firstChild;
+           while (n &amp;&amp; n.nodeType != 1) n=n.nextSibling;
+           if (!n) n=desc.firstChild;
+           return n; // desc.firstChild.nodeValue;
+        } else {
+           return '';
+        }
+      }
+      function zoom (amount) {
+        var old_scale = root.currentScale;
+        var new_scale = old_scale + amount;
+        var rescale = new_scale/old_scale;
+        root.currentScale = new_scale;
+        root.setAttribute('width',Number(root.getAttribute('width'))*rescale);
+        root.setAttribute('height',Number(root.getAttribute('height'))*rescale);
+      }
+      function hide_tooltip(event) {
+         if (event.target == last_target &amp;&amp; top.changeToolTip) {
+            top.changeToolTip("");
+         }
+      }
+      function show_tooltip(event) {
+        var target = event.target;
+        if (!top.placeTip) return;
+        var x = event.clientX;
+        var y = event.clientY;
+        top.placeTip(x,y,root,event);
+        if ( last_target != target ) {
+          last_target = target;
+          if (top.onSVGMouseOver) top.onSVGMouseOver(target);
+          if (target==root) return;
+          var desc;
+          for (var i=0; i&lt;target.childNodes.length; i++) {
+            var n = target.childNodes[i];
+            if (n.nodeName == 'desc') {
+              desc = n;
+              break;
+            }
+          }
+          if ( desc ) {
+            tooltip_text = desc.firstChild.nodeValue;
+            if (tooltip_text == null) {
+              top.changeToolTip('');
+            } else {
+              top.changeToolTip(tooltip_text.split(/\n/).join("&lt;br /&gt;"));
+            }
+          }
+        }
+      }
+
+</script>
+ <defs>
+  <style type="text/css"></style>
+ </defs>
+ <g transform="translate(5 5)">
+  <path id="i6" d="M38,193 L58,104" fill="none" stroke-linejoin="round" stroke="#555555" stroke-width="2" stroke-linecap="butt" stroke-dasharray="none" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i14" d="M48,282 L38,193" fill="none" stroke-width="2" stroke="#555555" stroke-linejoin="round" stroke-dasharray="none" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i22" d="M58,104 L28,15" fill="none" stroke-linejoin="round" stroke="#555555" stroke-width="1" stroke-dasharray="2,4" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i32" d="M91,193 L58,104" fill="none" stroke-linecap="butt" stroke-dasharray="none" stroke-width="2" stroke="#555555" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i40" d="M101,371 L154,282" fill="none" stroke-width="2" stroke="#555555" stroke-linejoin="round" stroke-linecap="butt" stroke-dasharray="none" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i41" d="M101,371 C101,371,114.427416193762,266.098723481983,48.4064345984553,202.953196418642" fill="none" stroke-linejoin="round" stroke="#0000ff" stroke-width="1" stroke-linecap="butt" stroke-dasharray="none" class="line scale_width scale_arrow textualSPEC seg:0.0"></path>
+  <g transform="translate(38,193)">
+   <g transform="rotate(223)">
+    <polygon id="i41" stroke-width="0" fill="#0000ff" points="0,0 -18,-4 -16,0 -18,4" class="line scale_width scale_arrow textualSPEC seg:0.0"></polygon>
+   </g>
+  </g>
+  <path id="i49" d="M154,282 L91,193" fill="none" stroke-dasharray="none" stroke-linecap="butt" stroke-linejoin="round" stroke="#555555" stroke-width="2" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i59" d="M198,371 L154,282" fill="none" stroke-width="2" stroke="#555555" stroke-linejoin="round" stroke-dasharray="none" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i69" d="M208,460 L198,371" fill="none" stroke-linejoin="round" stroke="#555555" stroke-width="2" stroke-dasharray="none" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <ellipse id="i1" cx="28.5" cy="15" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#c0c0c0" class="point node seg:0.0"></ellipse>
+  <ellipse id="i7" cx="38.5" cy="193" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#00ff00" class="point node seg:0.0">
+   <desc>gram/gender : fem
+gram/number : sg
+gram/sempos : n.denot
+gram/typgroup : single</desc>
+  </ellipse>
+  <ellipse id="i15" cx="48.5" cy="282" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0">
+   <desc>gram/gender : fem
+gram/negation : neg0
+gram/number : sg
+gram/sempos : n.denot.neg
+gram/typgroup : single</desc>
+  </ellipse>
+  <ellipse id="i23" cx="58.5" cy="104" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0">
+   <desc>gram/aspect : proc
+gram/deontmod : hrt
+gram/diatgram : act
+gram/factmod : potential
+gram/iterativeness : it0
+gram/sempos : v
+gram/tense : nil</desc>
+  </ellipse>
+  <ellipse id="i33" cx="91.5" cy="193" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0">
+   <desc>gram/degcmp : pos
+gram/negation : neg0
+gram/sempos : adj.denot</desc>
+  </ellipse>
+  <rect id="i42" x="98" y="367.5" width="7" height="7" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffffff" class="point node seg:0.0">
+   <desc>gram/gender : fem
+gram/number : sg
+gram/person : 3
+gram/politeness : basic
+gram/sempos : n.pron.def.pers</desc>
+  </rect>
+  <rect id="i50" x="151" y="278.5" width="7" height="7" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffffff" class="point node seg:0.0">
+   <desc>gram/aspect : proc
+gram/deontmod : hrt
+gram/diatgram : act
+gram/factmod : potential
+gram/iterativeness : it0
+gram/sempos : v
+gram/tense : nil</desc>
+  </rect>
+  <ellipse id="i60" cx="198.5" cy="371" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0">
+   <desc>gram/gender : fem
+gram/number : sg
+gram/sempos : n.denot
+gram/typgroup : single</desc>
+  </ellipse>
+  <ellipse id="i70" cx="208.5" cy="460" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0">
+   <desc>gram/degcmp : pos
+gram/negation : neg0
+gram/sempos : adj.denot</desc>
+  </ellipse>
+  <rect id="i3" x="24" y="27" width="124" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i5" x="24" y="43" width="24" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i9" x="34" y="205" width="28" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i11" x="34" y="221" width="29" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i13" x="34" y="237" width="45" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i17" x="44" y="294" width="98" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i19" x="44" y="310" width="29" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i21" x="44" y="326" width="70" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i27" x="54" y="116" width="101" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i29" x="54" y="132" width="40" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i31" x="54" y="148" width="9" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i35" x="87" y="205" width="65" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i37" x="87" y="221" width="42" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i39" x="87" y="237" width="55" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i44" x="97" y="383" width="63" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i46" x="97" y="399" width="29" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i48" x="97" y="415" width="89" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i52" x="150" y="294" width="62" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i56" x="150" y="310" width="66" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i58" x="150" y="326" width="9" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i62" x="194" y="383" width="65" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i66" x="194" y="399" width="64" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i68" x="194" y="415" width="45" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i72" x="204" y="472" width="63" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i74" x="204" y="488" width="39" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i76" x="204" y="504" width="55" height="16" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <text x="25" y="40" id="i2" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">t-cmpr9410-011-p2s1</text>
+  <text x="25" y="56" id="i4" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#00008b" width="0" class="text text_item seg:0.0">root</text>
+  <text x="35" y="218" id="i8" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">míra</text>
+  <text x="35" y="234" id="i10" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">ACT</text>
+  <text x="35" y="250" id="i12" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">n.denot</text>
+  <text x="45" y="307" id="i16" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">nezaměstnanost</text>
+  <text x="45" y="323" id="i18" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">APP</text>
+  <text x="45" y="339" id="i20" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">n.denot.neg</text>
+  <text x="55" y="129" id="i24" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">vyvíjet_se</text>
+  <text x="119" y="129" id="i26" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#006400" width="0" class="text text_item seg:0.0">enunc</text>
+  <text x="55" y="145" id="i28" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">PRED</text>
+  <text x="55" y="161" id="i30" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">v</text>
+  <text x="88" y="218" id="i34" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">protikladně</text>
+  <text x="88" y="234" id="i36" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">MANN</text>
+  <text x="88" y="250" id="i38" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">adj.denot</text>
+  <text x="98" y="396" id="i43" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">#PersPron</text>
+  <text x="98" y="412" id="i45" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">ACT</text>
+  <text x="98" y="428" id="i47" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">n.pron.def.pers</text>
+  <text x="151" y="307" id="i51" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">vyvíjet_se</text>
+  <text x="151" y="323" id="i53" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">CPR</text>
+  <text x="184" y="323" id="i55" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#a02818" width="0" class="text text_item seg:0.0">basic</text>
+  <text x="151" y="339" id="i57" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">v</text>
+  <text x="195" y="396" id="i61" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">ekonomika</text>
+  <text x="195" y="412" id="i63" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">LOC</text>
+  <text x="226" y="412" id="i65" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#a02818" width="0" class="text text_item seg:0.0">basic</text>
+  <text x="195" y="428" id="i67" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">n.denot</text>
+  <text x="205" y="485" id="i71" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">standardní</text>
+  <text x="205" y="501" id="i73" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#601808" width="0" class="text text_item seg:0.0">RSTR</text>
+  <text x="205" y="517" id="i75" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#8b008b" width="0" class="text text_item seg:0.0">adj.denot</text>
+  <text x="115" y="129" id="i25" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#006400" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="180" y="323" id="i54" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#a02818" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="222" y="412" id="i64" text-anchor="start" font-family="Arial" font-weight="normal" font-size="13" font-slant="roman" fill="#a02818" width="0" class="plaintext text_item seg:0.0">.</text>
+ </g>
+</svg>

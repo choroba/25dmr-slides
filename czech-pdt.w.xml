@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wdata xmlns="http://ufal.mff.cuni.cz/pdt/pml/">
+<head>
+<schema href="wdata_c_schema.xml" />
+</head>
+<meta>
+<original_format>csts</original_format>
+</meta>
+<doc id="w-cmpr9410-011" source_id="s/inf/j/1994/cmpr9410-011">
+<docmeta>
+<othermeta origin="csts/doc/a">
+&lt;mod>s
+&lt;txtype>inf
+&lt;genre>mix
+&lt;med>j
+&lt;temp>1994
+&lt;authname>y
+&lt;opus>cmpr9410
+&lt;id>011
+</othermeta>
+</docmeta>
+<para>
+<othermarkup origin="csts/doc/p/@n">2</othermarkup>
+<w id="w-cmpr9410-011-p2s1w1">
+<token>Míra</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w2">
+<token>nezaměstnanosti</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w3">
+<token>by</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w4">
+<token>se</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w5">
+<token>měla</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w6">
+<token>vyvíjet</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w7">
+<token>protikladně</token>
+<no_space_after>1</no_space_after>
+</w>
+<w id="w-cmpr9410-011-p2s1w8">
+<token>,</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w9">
+<token>než</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w10">
+<token>ve</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w11">
+<token>standardní</token>
+</w>
+<w id="w-cmpr9410-011-p2s1w12">
+<token>ekonomice</token>
+<no_space_after>1</no_space_after>
+</w>
+<w id="w-cmpr9410-011-p2s1w13">
+<token>.</token>
+</w>

@@ -58,7 +58,7 @@ div.background {
 /* this rule is hidden from IE which doesn't support + selector */
 div.slide + div[class].slide { page-break-before: always;}
 
-div.slide h1 {
+div.slide h1{
   padding-left: 3em;
   padding-right: 4em;
   padding-top: 0.3em;
@@ -195,7 +195,9 @@ img { background-color: transparent }
 
 p.copyright { font-size: smaller }
 
+td.bold   { font-weight: bold }
 .center { text-align: center }
+.right  { text-align: right }
 .footnote { font-size: smaller; margin-left: 2em; }
 
 a img { border-width: 0; border-style: none }
@@ -584,17 +586,28 @@ blockquote {
 }
 
 table.bg {
-    border-spacing : 2px;
+    border-spacing : 3px;
     background:white;
 }
 
 table.bg th {
-    background:#55451c;
-    color: yellow;
+    background:#f47b20;
+    color: white;
 }
 
 table.bg td {
-    background: #d8b765;
+    color: #595959;
+    background: #efefef;
+}
+
+table.bg tr.dark td {
+    color: #efefef;
+    background: #595959;
+}
+
+table.border {
+    border-collapse: collapse;
+    border: 2pt solid #dfdfdf;
 }
 
 code {

@@ -153,7 +153,7 @@ s1l2: 7-7
     <!-- ====================================================================== -->
     <div class="slide wf">
       <h1>Data Selected for the Experiment</h1>
-      <table class="align-top"><tr><th>Czech<th>Latin
+      <table class="align-top border"><tr><th>Czech<th>Latin
             <tr><td><ul><li>News: 25 sentences
                     <li>Spontaneous dialogues: 50 sentences
                       <li>Translated WSJ texts: 16 sentences</ul>
@@ -168,25 +168,127 @@ s1l2: 7-7
     <!-- ====================================================================== -->
     <div class="slide wf">
       <h1>Metrics for Graph Comparison</h1>
-      <p>
+      <ol type="1">
+        <li>Match nodes <span class="incremental" style="font-weight:bold">← Problematic</span>
+        <li>Compare triples <tt>(node, relation_or_attribute, value_or_node)</tt>
+      </ol>
     </div>
 
     <!-- ====================================================================== -->
     <div class="slide wf">
-      <h1></h1>
-      <p>
+        <h1>Metrics for Graph Comparison</h1>
+        <ol type="1">
+            <li>Match nodes <b>← Problematic</b>
+            <li>Compare triples <tt>(node, relation_or_attribute, value_or_node)</tt>
+        </ol>
+        <p>Problems:
+            <ul>
+                <li>Different number of nodes</li>
+                <li class="incremental">Different mapping (nodes to words)</li>
+                <li class="incremental">Different names of variables (typically <tt class="non-incremental">s2v1</tt> versus <tt class="non-incremental">s2v2</tt>)
+            </ul>
     </div>
 
     <!-- ====================================================================== -->
     <div class="slide wf">
-      <h1></h1>
-      <p>
+      <h1>Metrics for Graph Comparison (2)</h1>
+      <h2>Existing Metrics</h2>
+      <table class="align-top border"><tr><th>smatch<th>AnCast</tr>
+          <td><ul><li>Standard for AMR</li>
+              <li>The optimal mapping maximizes the F<sub>1</sub> of the triples
+          </td><td><ul><li>Proposed for UMR</li>
+              <li>Can use the word alignment (continuous)</li>
+              <li>Concept similarity (naive)</li>
+          </td></table>
+      <p>Both map as many nodes as possible: <span style="color:#a0a0a0;text-shadow:grey 1pt 3pt 6pt">blurs</span> interpretation
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+      <h1>Metrics for Graph Comparison (3)</h1>
+      <h2>A New Metric <i>juːmæʧ</i></h2>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+        <h1>Quantitative Comparison</h1>
+        <h2>UMR Node mapping</h2>
+        <table class="bg align-top">
+            <tr>
+                <th>Corpus<th>Manual<th>Auto<th>Recall<th>Precision<th>F<sub>1</sub>
+            </tr>
+            <tr><td>PDT<td class="right">375<td class="right">349<td class="right">76%<td class="right">81%<td class="right bold">78%
+            <tr><td>PDTSC<td class="right">442<td class="right">305<td class="right">53%<td class="right">77%<td class="right bold">63%
+            <tr><td>PCEDT<td class="right">307<td class="right">327<td class="right">79%<td class="right">75%<td class="right">77%
+            <tr class="dark"><td>Total<td class="right">1124<td class="right">981<td class="right">68%<td class="right">78%<td class="right">72%
+            <tr><td>Latin<td class="right">773<td class="right">865<td class="right">81%<td class="right">73%<td class="right">77%
+        </table>
+
+        <h4>IAA (PDT+PDTSC 21 sentences)</h4>
+        <table class="bg"><th>A1<th>A2<th>Recall<th>Precision<th>F<sub>1</sub>
+            <tr><td class="right">228<td class="right">221<td class="right">94%<td class="right">97%<td class="right">96%
+        </table>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+        <h1>Quantitative Comparison (2)</h1>
+        <h2>Concept and Relation Comparison</h2>
+        <h3>Unmapped nodes are ignored</h3>
+        <table class="bg align-top">
+            <tr>
+                <th>Corpus<th>Manual Triples<th>Auto Triples<th>Recall<th>Precision<th>F<sub>1</sub>
+            </tr>
+            <tr><td>PDT<td class="right">844<td class="right">819<td class="right">59%<td class="right">61%<td class="right bold">60%
+            <tr><td>PDTSC<td class="right">622<td class="right">633<td class="right">57%<td class="right">56%<td class="right">56%
+            <tr><td>PCEDT<td class="right">714<td class="right">588<td class="right">48%<td class="right">58%<td class="right bold">53%
+            <tr class="dark"><td>Total<td class="right">2180<td class="right">2040<td class="right">55%<td class="right">59%<td class="right">57%
+            <tr><td>Latin<td class="right">1820<td class="right">1923<td class="right">64%<td class="right">61%<td class="right">62%
+        </table>
+
+        <h4>IAA (PDT+PDTSC 21 sentences)</h4>
+        <table class="bg"><th>A1<th>A2<th>Recall<th>Precision<th>F<sub>1</sub>
+            <tr><td class="right">633<td class="right">644<td class="right">94%<td class="right">92%<td class="right">93%
+        </table>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+        <h1>Quantitative Comparison (3)</h1>
+        <h2>Concept and Relation Comparison</h2>
+        <h3>Unmapped nodes are considered incorrect</h3>
+        <table class="bg align-top">
+            <tr>
+                <th>Corpus<th>Manual Triples<th>Auto Triples<th>Recall<th>Precision<th>F<sub>1</sub> = <i>juːmæʧ</i><th>smatch
+            </tr>
+            <tr><td>PDT<td class="right">1082<td class="right">916<td class="right">46%<td class="right">55%<td class="right bold">50%<td class="right">49%
+            <tr><td>PDTSC<td class="right">1318<td class="right">770<td class="right">27%<td class="right">46%<td class="right bold">34%<td class="right">37%
+            <tr><td>PCEDT<td class="right">916<td class="right">757<td class="right">37%<td class="right">45%<td class="right">41%<td class="right">51%
+            <tr class="dark"><td>Total<td class="right">3316<td class="right">2443<td class="right">36%<td class="right">49%<td class="right">42%<td class="right">45%
+            <tr><td>Latin<td class="right">2174<td class="right">2367<td class="right">54%<td class="right">49%<td class="right">51%<td class="right">58%
+        </table>
+
+        <h4>IAA (PDT+PDTSC 21 sentences)</h4>
+        <table class="bg"><th>A1<th>A2<th>Recall<th>Precision<th>F<sub>1</sub> = <i>juːmæʧ</i>
+            <tr><td class="right">663<td class="right">659<td class="right">90%<td class="right">90%<td class="right">90%
+        </table>
+    </div>
+
+    <!-- ====================================================================== -->
+    <div class="slide wf">
+        <h1>Analysis of the Differences</h1>
+        <ul>
+            <li>UMR allows for several possible annotations to be correct</li>
+            <li>Examples of individual phenomena shown in the paper (abstract predicates, event–entity distinction, abstract entities)</li>
+        </ul>
     </div>
 
     <!-- ====================================================================== -->
 
     <div class="slide center wf">
       <h1>Thank you</h1>
+      <p class="skip">
+          <tt><a href="https://ufallab.ms.mff.cuni.cz/~stepanek/25dmr-slides">https://ufallab.ms.mff.cuni.cz/~stepanek/25dmr-slides</a></tt>
     </div>
 
     <!-- ====================================================================== -->

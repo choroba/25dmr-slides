@@ -28,3 +28,7 @@ clean:
 .PHONY: loop
 loop:
 	while inotifywait -e modify -e move -e create -e delete --exclude '^\./\.git/|\.#|~$$' -r . ; do $(MAKE) ; done
+
+.PHONY: upload
+upload: index.html
+	rsync -e ssh -vrRmz --exclude='*~' index.html graphics/ help/ img/ scripts/ styles/ $$(< upload):public_html/$(PROJECT)/

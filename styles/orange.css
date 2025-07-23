@@ -545,14 +545,14 @@ span.string, span.str { color:brown }
 span.builtin {
   color: #da70d6;
  }
-span.constant, span.relation, span.axis {
+span.constant, span.relation, span.axis, span.label {
   color: #5f9ea0;
  }
 span.function-name, span.func {
-  color: navy;
+  color: #a020f0;
  }
 span.keyword {
-  color: #a020f0;
+  color: navy;
  }
 span.variable-name, span.var {
   color: #b8860b;
@@ -561,7 +561,7 @@ span.type, span.cperl-nonoverridable, span.nonoverridable {
   color: darkmagenta;
  }
 span.comment, span.comment-delimiter {
-  color: red;
+  color: #808080;
 }
 span.cperl-hash, span.hash {
   color: darkorange;
@@ -660,7 +660,6 @@ span.default                                    { color: #000000; }
 span.nxml-text                                  { color: #000000; }
 span.nxml-tag-slash                             { color: #000000; }
 span.nxml-attribute-local-name                  { color: #ffa500; }
-span.string                                     { color: #8b7d7b; }
 span.nxml-namespace-attribute-xmlns             { color: #da70d6; }
 span.nxml-element-local-name                    { color: #0000ff; }
 span.nxml-tag-delimiter                         { color: #000000; }

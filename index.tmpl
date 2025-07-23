@@ -71,36 +71,36 @@
     <div class="slide wf">
       <h1>Uniform Meaning Representation</h1>
       <div style="position:absolute;right:8em;top:6em;z-axis:10000"><img src="img/umr_english.png"></div>
-      <pre>################################################################################
+      <pre><span class="comment">################################################################################
 # meta-info :: sent_id = u_tree-cs-s1-root
-# :: snt1
-Index: 1       2    3  4     5  6   7     8
-Words: Lindsay left in order to eat lunch .
+# :: snt1</span>
+<span class="label">Index:</span> 1       2    3  4     5  6   7     8
+<span class="label">Words:</span> Lindsay left in order to eat lunch .
 
-# sentence level graph:
-(s1l / leave-02
-    :ARG0 (s1p / person
-        :name (s1n / name :op1 "Lindsay"))
-    :aspect performance
-    :purpose (s1e / eat-01
-        :ARG0 s1p
-        :ARG1 (s1l2 / lunch)
-        :aspect performance))
+<span class="comment"># sentence level graph:</span>
+(<span class="var">s1l</span> / leave-02
+    <span class="label">:ARG0</span> (<span class="var">s1p</span> / person
+        <span class="label">:name</span> (<span class="var">s1n</span> / name <span class="label">:op1</span> <span class="string">"Lindsay"</span>))
+    <span class="label">:aspect</span> <span class="keyword">performance</span>
+    <span class="label">:purpose</span> (<span class="var">s1e</span> / eat-01
+        <span class="label">:ARG0</span> <span class="var">s1p</span>
+        <span class="label">:ARG1</span> (<span class="var">s1l2</span> / lunch)
+        <span class="label">:aspect</span> <span class="keyword">performance</span>))
 
-# alignment:
-s1l: 2-2
-s1p: 1-1
-s1n: 0-0
-s1e: 6-6
-s1l2: 7-7
+<span class="comment"># alignment:</span>
+<span class="var">s1l</span>: 2-2
+<span class="var">s1p</span>: 1-1
+<span class="var">s1n</span>: 0-0
+<span class="var">s1e</span>: 6-6
+<span class="var">s1l2</span>: 7-7
 
-# document level annotation:
-(s1s0 / sentence
-    :temporal ((document-creation-time :before s1l)
-            (s1l :after s1e))
-    :modal ((root :modal author)
-            (author :full-affirmative s1l)
-            (author :full-negative s1e)))</pre>
+<span class="comment"># document level annotation:</span>
+(<span class="var">s1s0</span> / sentence
+    <span class="label">:temporal</span> ((document-creation-time <span class="label">:before</span> <span class="var">s1l</span>)
+            (<span class="var">s1l</span> <span class="label">:after</span> <span class="var">s1e</span>))
+    <span class="label">:modal</span> ((root <span class="label">:modal</span> author)
+            (author <span class="label">:full-affirmative</span> <span class="var">s1l</span>)
+            (author <span class="label">:full-negative</span> <span class="var">s1e</span>)))</pre>
     </div>
 
     <!-- ====================================================================== -->

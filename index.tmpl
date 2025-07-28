@@ -20,7 +20,7 @@
       <table class="beamer"><tr><td style="color:white">DMR 2025 Prague</table>
 
       <p class="skip">
-      <h2>Comparing Manual and Automatic UMRs for Czech and Latin</h2>
+      <h2>Comparing Manual and Automatic UMRs for Czech and Latin</h2>
       <h3>Jan Štěpánek</h3>
       <h3>Daniel Zeman</h3>
       <h3>Markéta Lopatková</h3>
@@ -125,7 +125,7 @@
                   <li>semantic relations crossing sentence boundaries: coreference, temporal chains, epistemic modality
                 </ul>
                 <td class="non-incremental"><ul>
-                    <li>represents linguistically structured meaning
+                    <li>represents linguistically structured meaning (vs. situational meaning)
                     <li>predicate-argument structure (valency) and dependency relations
                     <li>topic-focus articulation
                     <li>coreference
@@ -146,7 +146,7 @@
       </ul>
       <h2>Ignored (so far)</h2>
       <ul>
-        <li>Attributes <tt>wiki, modal-strength, mode, polite, quote</tt>
+        <li>Attributes <tt>wiki, modal-strength, quote, <span style="color:green">mode, polite</span></tt>
         <li>Most of the document-level annotation (besides coreference)
     </div>
 
@@ -163,7 +163,7 @@
                   Agreement">IAA</span>.
               <td><ul><li><i>De coniuratione Catilinae</i> by Sallust: 50 sentences</ul>
       </table>
-      <p class="skip">👉 Download the <a href="http://hdl.handle.net/11234/1-5951">data! 👈
+      <p class="skip">👉 Download the <a href="http://hdl.handle.net/11234/1-5951">data!</a> 👈
     </div>
 
     <!-- ====================================================================== -->
@@ -171,7 +171,9 @@
       <h1>Metrics for Graph Comparison</h1>
       <ol type="1">
         <li>Match nodes <span class="incremental" style="font-weight:bold">← Problematic</span>
-        <li>Compare triples <tt>(node, relation_or_attribute, value_or_node)</tt>
+        <li>Compare triples:<br>
+          <tt>(node, relation, node)</tt><br>
+          <tt>(node, attribute, value)</tt>
       </ol>
     </div>
 
@@ -180,7 +182,9 @@
         <h1>Metrics for Graph Comparison</h1>
         <ol type="1">
             <li>Match nodes <b>← Problematic</b>
-            <li>Compare triples <tt>(node, relation_or_attribute, value_or_node)</tt>
+            <li>Compare triples:<br>
+          <tt>(node, relation, node)</tt><br>
+          <tt>(node, attribute, value)</tt>
         </ol>
         <p>Problems:
             <ul>
